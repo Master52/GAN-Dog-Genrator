@@ -13,13 +13,13 @@ Why dogs? We chose dogs because, well, who doesn’t love looking at photos of a
 
 Generative methods (in particular, GANs) are currently used in various places on Kaggle for data augmentation. Their potential is vast; they can learn to mimic any distribution of data across any domain: photographs, drawings, music, and prose. If successful, not only will you help advance the state of the art in generative image creation, but you’ll enable us to create more experiments across a variety of domains in the future.
 
-##Requirement
+## Requirement
 * python3 
 * tensorflow
 * keras
 * opencv2
 
-###Optinal
+### Optinal
 * tensorflow-gpu
 * cuda-toolkit
 * libcudnn
@@ -31,13 +31,13 @@ Generative methods (in particular, GANs) are currently used in various places on
     optirun ./gan_dog.py
 ```
 
-##Output
-Ouput after 150 epoches
+## Output
+ After 150 epoches
 
-![](https://github.com/Master52/GAN-Dog-Genrator/107.png)
-![](https://github.com/Master52/GAN-Dog-Genrator/108.png)
-![](https://github.com/Master52/GAN-Dog-Genrator/192.png)
-![](https://github.com/Master52/GAN-Dog-Genrator/193.png)
-![](https://github.com/Master52/GAN-Dog-Genrator/194.png)
-![](https://github.com/Master52/GAN-Dog-Genrator/197.png)
-![](https://github.com/Master52/GAN-Dog-Genrator/96.png)
+![](https://github.com/Master52/GAN-Dog-Genrator/blob/master/107.png)
+![](https://github.com/Master52/GAN-Dog-Genrator/blob/master/108.png)
+![](https://github.com/Master52/GAN-Dog-Genrator/blob/master/192.png)
+![](https://github.com/Master52/GAN-Dog-Genrator/blob/master/193.png)
+![](https://github.com/Master52/GAN-Dog-Genrator/blob/master/194.png)
+![](https://github.com/Master52/GAN-Dog-Genrator/blob/master/197.png)
+![](https://github.com/Master52/GAN-Dog-Genrator/blob/master/96.png)
