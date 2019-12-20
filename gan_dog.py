@@ -6,15 +6,15 @@ import numpy as np
 import os
 from keras.models import Sequential
 from keras.layers import Conv2D,UpSampling2D,Reshape,Activation,Dense,BatchNormalization,LeakyReLU,Flatten,Dropout
-import tensorflow as tf
 from keras.optimizers import Adam
 from GAN import GAN
 
 
 PATH = "dataset/Images"
 IMG_SIZE = tuple((64,64))
-MAX_IMG= 32
-SEED = 100
+MAX_IMG= 252 
+
+#Getting MAX images and resizing it into 64*64
 
 IMAGES =  np.asarray([
                   cv.resize(
@@ -23,19 +23,22 @@ IMAGES =  np.asarray([
                   for f in os.listdir(PATH)[0:MAX_IMG]
                   ])
 
-def define_generator(channel,latent_space = SEED):
+def define_generator(channel,latent_space = 100):
     model = Sequential()
     model.add(Dense(4*4*256,activation = 'relu' ,input_dim = latent_space))
     model.add(Reshape((4,4,256)))
+
     #upsampling image to 8 * 8
     model.add(UpSampling2D())
     model.add(Conv2D(256, kernel_size= 3,padding = 'same'))
     model.add(Activation("relu"))
+
     #upsampling image to 16 * 16
     model.add(UpSampling2D())
     model.add(Conv2D(256,kernel_size = 3,padding = 'same'))
     model.add(BatchNormalization(momentum=0.8))
     model.add(Activation("relu"))
+
     #upsampling image to 32 * 32
     model.add(UpSampling2D())
     model.add(Conv2D(128,kernel_size = 3,padding = 'same'))
@@ -51,7 +54,6 @@ def define_generator(channel,latent_space = SEED):
     model.add(Activation('tanh'))
 
     return model
-
 
 def define_descriminator(image_shape):
     model = Sequential()
@@ -90,6 +92,7 @@ def define_descriminator(image_shape):
 
 def load_real_img(IMAGES):
     IMAGES = np.asarray(IMAGES,np.float32)
+    #normalizing imgages b/w -1 to 1
     IMAGES = IMAGES / 127.5 -1
     return IMAGES
 
@@ -98,19 +101,14 @@ if __name__ == '__main__':
     generator = define_generator(channel = 3)
     discriminator = define_descriminator(IMAGES[0].shape)
     gan = GAN(generator,discriminator)
+
     for i in range(200):
-        print(f'batche:{i}')
-        img = gan.run(load_real_img(IMAGES),SEED)
+        print(f'epoches:{i}')
+        img = gan.run(load_real_img(IMAGES),100)
         e = str(i) + ".png"
         cv.imwrite(e,img)
         print(f'Done:{i}')
 
 #TODO 
-# * D-dimensional noise vecot (64,64,3)[1000] -> G(64,64,3)[1000] Genrator  network -> Fake Image  DONE
-
-#
-# [Fake Image ->  Discrimator network <- Real Image]->sample image
-# sample image -> fine tunning -> genrator 
-
 
 
